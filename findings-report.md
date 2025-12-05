@@ -20,7 +20,7 @@ I would be deep diving all the chapters and will provide the detailed findings i
 
 
 | ID   | Severity | Description                                                | Steps                                    |
-| ---- | -------- | ---------------------------------------------------------- | ---------------------------------------- | -------------- |
+| ---- | -------- | ---------------------------------------------------------- | ---------------------------------------- |
 | L-01 | High     | Invalid password error message unclear / poorly positioned |Given I am on Login page
                                                                                 And login with valid credentials 
                                                                                 Then I see the WIRE web app successfully 
