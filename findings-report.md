@@ -19,12 +19,9 @@ For better visibility of what will be covered as Exploratory testing in the task
 I would be deep diving all the chapters and will provide the detailed findings in each one of them :-
 
 
-| ID   | Severity | Description                                                | Steps                                    |
-| ---- | -------- | ---------------------------------------------------------- | ---------------------------------------- |
-| L-01 | High     | Invalid password error message unclear / poorly positioned |Given I am on Login page
-                                                                                And login with valid credentials 
-                                                                                Then I see the WIRE web app successfully 
-| L-02 | Medium   | Parallel logins allowed with correct session behavior      |
-| L-03 | Low      | No inline validation for invalid email format              |
-| L-04 | Medium   | Logout → deep link → correctly redirected to login         |
-| L-05 | Medium   | Back button after logout briefly flashes protected UI      |
+### Login and Session Management 
+
+
+| ID   | Severity | Type                | Description                                                                                                                                                                                                                         | Steps                                                                                                   | Expected                                                                                                         | Actual                                                                                               |
+| ---- | -------- | ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| L-04 | Medium   | Security/Functional | Session persists in a normal browser after closing the tab, but in Incognito the session is cleared on browser close (expected), highlighting that session persistence rules may need clarification for a secure messaging product. | 1. Log in using normal browser 2. Close tab 3. Open new tab and revisit app 4. Repeat test in Incognito | Behavior depends on product requirement: secure apps often require fresh login unless “Remember Me” is explicit. | Normal browser persists session (user still logged in). Incognito clears session after window close. |
