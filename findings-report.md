@@ -38,7 +38,10 @@ Attached you will find the test cases executed for testing this functionality do
 
 ![Sample image of test cases ](./images/Sample_image_LoginTestCase.png)
 
-The analysis summarizes provided below focuses on observed gaps or risks. For the successful scenarios you can refer to the excel file.
+<br></br>
+
+
+***The analysis below summarizes focuses on issues, observed gaps or risks. For the successful scenarios you can refer to the excel file.***
 
 ## Issues 
 
