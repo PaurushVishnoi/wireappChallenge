@@ -48,7 +48,7 @@ The analysis summarizes provided below focuses on observed gaps or risks. For th
 
 
 
-### 1 – Valid login flow works as expected
+### Valid login flow works as expected
 - Correct credentials lead to successful authentication.
 
 ### Invalid email and wrong password validation works correctly
@@ -81,7 +81,9 @@ Risks (High-Level, Not Tied to a Specific Defect)
 - As stated in TC-1, for a secure messaging platform, persistent sessions should ideally be configurable or controlled  
   (e.g., session timeout, “Remember Me”).
 
-  | ID       | Severity | Area                             | Issue Summary                                                               | Description                                                                                                                                                                                                                                                                 |
+
+
+| ID       | Severity | Area                             | Issue Summary                                                               | Description                                                                                                                                                                                                                                                                 |
 | -------- | -------- | -------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **L-01** | **High** | Session Persistence / Navigation | User session is lost when navigating back and forward using browser history | After logging in, clicking the browser Back button shows the login page (expected), but clicking Forward does *not* restore the session — the user is logged out instead. This indicates session tokens are not retained or revalidated properly during history navigation. |
 
