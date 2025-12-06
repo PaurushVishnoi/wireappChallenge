@@ -44,8 +44,10 @@ The analysis summarizes provided below focuses on observed gaps or risks. For th
 | -------- | -------- | -------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **1** | **High** | Session Persistence / Navigation | User session is lost when navigating back and forward using browser history | After logging in, clicking the browser Back button shows the login page (expected), but clicking Forward does *not* restore the session — the user is logged out instead. This indicates session tokens are not retained or revalidated properly during history navigation. |
 
-## Observations and Risks
+-------
 
+
+## Observations and Risks
 
 
 ### Valid login flow works as expected
@@ -85,7 +87,7 @@ Risks (High-Level, Not Tied to a Specific Defect)
 
 | ID       | Severity | Area                             | Issue Summary                                                               | Description                                                                                                                                                                                                                                                                 |
 | -------- | -------- | -------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **L-01** | **High** | Session Persistence / Navigation | User session is lost when navigating back and forward using browser history | After logging in, clicking the browser Back button shows the login page (expected), but clicking Forward does *not* restore the session — the user is logged out instead. This indicates session tokens are not retained or revalidated properly during history navigation. |
+| **1** | **High** | Session Persistence / Navigation | User session is lost when navigating back and forward using browser history | After logging in, clicking the browser Back button shows the login page (expected), but clicking Forward does *not* restore the session — the user is logged out instead. <br> This indicates session tokens are not retained or revalidated properly during history navigation.</br> |
 
 
 
