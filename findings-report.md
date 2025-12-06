@@ -19,19 +19,33 @@ For better visibility of what will be covered as Exploratory testing in the task
 I would be deep diving all the chapters and will provide the detailed findings in each one of them :-
 
 
-### Login and Session Management 
+## Login and Session Management 
+
+The Login & Session Management exploratory chapter focused on validating : -
+
+- Authentication (valid/invalid credentials)
+- Password reset flow
+- Session persistence (normal vs. incognito browser)
+- Parallel login behavior
+- Access control via deep-link URLs
+
+Testing was performed across Chrome, Edge, and Chrome Incognito windows using multiple Wire accounts (Aura Schaefer, Deena Green).
 
 
-| ID        | Severity | Category                  | Description / Analysis                                                                                                                                                                     | Expected                                                       | Actual                                                       | Result                          |
-| --------- | -------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------- | ------------------------------------------------------------ | ------------------------------- |
-| **TC-01** | Low      | Functional                | Valid login with correct credentials works as expected. No functional issues found.                                                                                                        | User should land on Wire main page.                            | User successfully reaches main page.                         | **Pass**                        |
-| **TC-02** | Low      | Functional / Validation   | Invalid email format triggers proper validation. Error message is accurate and user-friendly.                                                                                              | “Please enter a valid email or SSO code”                       | Error message displayed correctly.                           | **Pass**                        |
-| **TC-03** | Low      | Functional                | Login with incorrect password correctly triggers authentication error.                                                                                                                     | Error: “Please verify your details and try again”              | Correct error message displayed.                             | **Pass**                        |
-| **TC-04** | Medium   | Functional / Usability    | Password reset flow initiates correctly. However, as email access is unavailable, ability to verify the reset link cannot be validated. This creates a partial gap in functional coverage. | Success message + reset email received                         | Success message shown but link verification not possible     | **Pass (with conditions)**      |
-| **TC-05** | Medium   | Session Handling          | Parallel login in *different browsers* works as expected. Both users can remain logged in independently.                                                                                   | Both users remain logged in on separate browsers               | Behavior matches expected                                    | **Pass**                        |
-| **TC-06** | Medium   | Session Handling          | Parallel login with *two tabs in the same browser*: App correctly warns the user and logs out the previous session upon continuing. Behavior is aligned with modern security expectations. | Warning + logout previous session                              | Behavior matches expected                                    | **Pass**                        |
-| **TC-07** | Medium   | Session Persistence       | **Normal browser session persists after closing and reopening tabs.** This is expected browser behavior but may require review for security-sensitive applications like Wire.              | App may or may not persist session depending on product policy | User remains logged in without needing to authenticate again | **Pass** *(see analysis below)* |
-| **TC-08** | Low      | Session Persistence       | Incognito mode correctly clears session upon closing the window. No unexpected persistence observed.                                                                                       | No session retained in new Incognito window                    | User is logged out immediately                               | **Pass**                        |
-| **TC-09** | High     | Security / Access Control | Deep-link navigation while logged out correctly redirects to login without exposing protected content. This is a critical security check.                                                  | Immediate redirect to login                                    | Redirect works correctly                                     | **Pass**                        |
-| **TC-10** | High     | Security / Access Control | Attempting to access a conversation deep-link as an unauthorized user correctly triggers an “access denied” message. Good validation check for conversation-level access control.          | Error: “Wire couldn’t open this conversation…”                 | Error message displayed correctly                            | **Pass**                        |
+Attached you will find the test cases executed for testing this functionality domain. 
+
+[Login and Session Management test cases](./data/Wire_TestCase.xlsx)
+
+The analysis summarizes provided below focuses on observed gaps or risks. For the successful scenarios you can refer to the excel file.
+
+| ID       | Severity | Area                   | Finding                                                                                                                                                                                                               | Impact                                                                            | Recommendation                                                                                                                            |
+| -------- | -------- | ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| **F-01** | Medium   | Password Reset         | Password reset flow triggers successfully, but the **actual reset link could not be validated** due to lack of access to the test email inbox. A critical recovery path remains unverified.                           | Risk that broken reset-link logic could go unnoticed in production.               | Provide access to a test mailbox, expose reset emails in logs, or generate a temporary preview of email templates in the dev environment. |
+| **F-02** | Medium   | Session Persistence    | Closing and reopening a normal browser tab retains the user session without re-authentication. This may be inconsistent with Wire’s security expectations as a secure messaging product.                              | Risk of unauthorized access on shared devices; unclear session expiration policy. | Clarify expected session timeout. Consider configurable timeout or explicit “Remember Me” options to ensure user intent.                  |
+| **F-03** | Low      | Login UX               | Email format validation occurs only after submitting the form; no inline validation is provided.                                                                                                                      | Minor usability friction and increased likelihood of failed login attempts.       | Add inline client-side email validation (e.g., on blur or real-time input).                                                               |
+| **F-04** | Medium   | Deep-Link UX¹          | Accessing deep-link URLs while logged out correctly redirects to the login page, but if any UI element briefly flashes before redirect (confirm based on your observations), this may be a minor UX/security concern. | Momentary exposure of partial UI or confusing transition experience.              | Ensure protected routes are guarded **before** rendering UI components; add automated route-guard tests.                                  |
+| **F-05** | Medium   | Unauthorized Access UX | When accessing a conversation deep-link as an unauthorized user, the error message is correct but **lacks guidance on the next action** (e.g., switching accounts).                                                   | Users may misinterpret the error and assume the app is malfunctioning.            | Improve error wording or add a link to documentation explaining permission-based access.                                                  |
+
+
+
 
