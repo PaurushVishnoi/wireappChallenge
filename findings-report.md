@@ -50,25 +50,25 @@ The analysis summarizes provided below focuses on observed gaps or risks. For th
 ## Observations and Risks
 
 
-**Valid login flow works as expected**
+**1. Valid login flow works as expected**
 - Correct credentials lead to successful authentication.
 
-### Invalid email and wrong password validation works correctly
+**2.  Invalid email and wrong password validation works correctly**
 - Error messages are clear and consistent.
 
-### Password reset flow initiates successfully
+**3. Password reset flow initiates successfully**
 - Success message is displayed.  
 - *(Email verification could not be tested due to environment constraints.)*
 
-### Parallel logins behave correctly
+**4. Parallel logins behave correctly**
 - Same browser → user receives proper session override warning.  
 - Different browsers → sessions operate independently.
 
-### Session persistence behaves as expected
+**5. Session persistence behaves as expected**
 - Normal browser: session persists after tab close → expected.  
 - Incognito: session is wiped after close → expected.
 
-### Deep-link protection works correctly
+**6. Deep-link protection works correctly**
 - Unauthenticated access redirects to login.  
 - Unauthorized access shows correct error toast.
 
@@ -76,12 +76,14 @@ The analysis summarizes provided below focuses on observed gaps or risks. For th
 
 Risks (High-Level, Not Tied to a Specific Defect)
 
-### UI flash after logout may create perception of a failed logout
+**1. UI flash after logout may create perception of a failed logout**
 - Even though data is not exposed, the experience may reduce trust.
 
-### Session persistence is acceptable but may require product clarification
-- As stated in TC-07, for a secure messaging platform, persistent sessions should ideally be configurable or controlled  
-  (e.g., session timeout, “Remember Me”).
+**2. Session persistence is acceptable but may require product clarification**
+- As stated in TC-07, for a secure messaging platform like Wire, persistent login without explicit "Remember Me" settings may pose risks depending on the target security model. 
+
+It should be validated whether this persistence aligns with product requirements (especially for shared machines or high-security contexts).  
+(e.g., session timeout, “Remember Me”).
 
 | ID       | Severity | Type                | Description                                                                                                                                                                                                                    | Expected                                                                                                                             | Actual                                                                                                         |
 | -------- | -------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------- |
