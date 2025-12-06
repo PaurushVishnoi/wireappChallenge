@@ -80,9 +80,7 @@ Risks (High-Level, Not Tied to a Specific Defect)
 - Even though data is not exposed, the experience may reduce trust.
 
 **2. Session persistence is acceptable but may require product clarification**
-- As stated in TC-07, for a secure messaging platform like Wire, persistent login without explicit "Remember Me" settings may pose risks depending on the target security model. 
-
-It should be validated whether this persistence aligns with product requirements (especially for shared machines or high-security contexts).  
+- As stated in TC-07, for a secure messaging platform like Wire, persistent login without explicit "Remember Me" settings may pose risks depending on the target security model. <br>It should be validated whether this persistence aligns with product requirements (especially for shared machines or high-security contexts).</br>
 (e.g., session timeout, “Remember Me”).
 
 | ID       | Severity | Type                | Description                                                                                                                                                                                                                    | Expected                                                                                                                             | Actual                                                                                                         |
