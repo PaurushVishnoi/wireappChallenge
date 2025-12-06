@@ -50,7 +50,7 @@ The analysis summarizes provided below focuses on observed gaps or risks. For th
 ## Observations and Risks
 
 
-***Valid login flow works as expected***
+**Valid login flow works as expected**
 - Correct credentials lead to successful authentication.
 
 ### Invalid email and wrong password validation works correctly
